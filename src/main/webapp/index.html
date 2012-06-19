@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <title>Home</title>
+</head>
+<body class="lift:content_id=main">
+<div id="main" class="lift:surround?with=default;at=content">
+    <h2>Welcome to your project!</h2>
+
+    <h3>Foursquare Venue Search Example</h3>
+
+    <div style="font-size: 14px">
+        <div>
+            <span>Enter a place name:</span><br />
+            <input id="place_name" type="text" style="font-size: 14px; width: 300px">
+        </div>
+        <div>
+            <span>Enter a search location (city, state):</span><br />
+            <input id="search_location" type="text" style="font-size: 14px; width: 300px" value="Chicago, IL"> 
+        </div>
+        <div style="margin-top: 10px">
+          <span>Venue JSON Data:</span><br />
+          <textarea id="json_data" style="font-size: 14px"></textarea>
+        </div>
+    </div>
+
+<script>
+$(function() {
+  $("#place_name").autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: "/search",
+        dataType: "json",
+        data: {
+          term: request.term,
+          loc: $("#search_location").val()
+        },
+        success: function(data) {
+          response($.map(data, function(item) {
+            return {
+              label: item.label,
+              value: item.value,
+              json: item.json
+            }
+          }))
+        }
+      })
+    },
+    html: true,
+    minLength: 2,
+    position: {
+      my: "right top",
+      at: "right bottom"
+    },
+    select: function(event, ui) {
+      $("#json_data").val(ui.item.json);
+    }
+  });
+})
+</script>
+
+</div>
+
+</body>
+</html>
+
