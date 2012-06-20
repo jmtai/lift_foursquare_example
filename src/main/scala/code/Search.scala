@@ -2,15 +2,8 @@ package code {
 
 import net.liftweb.common.{ Box, Full, Empty }
 import net.liftweb.http._
-import net.liftweb.util._
-import net.liftweb.http.js.JsCmds._
-import net.liftweb.http.js.JE._
-import net.liftweb.util.Helpers._
 import net.liftweb.json._
 import net.liftweb.json.JsonDSL._
-import java.io._
-import java.util.Scanner
-import java.util.regex.Pattern
 import scala.xml.NodeSeq
 import org.scalafoursquare.call.{UserlessApp, HttpCaller, AuthApp}
 import org.scalafoursquare.response.{VenueSearchResponse, UserCompact, Response, VenueExploreResponse, VenueCompact, VenueLocation, CheckinForFriend}
